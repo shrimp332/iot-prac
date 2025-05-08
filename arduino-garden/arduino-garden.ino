@@ -1,7 +1,7 @@
 #include <ArduinoJson.h>
 
-const int WATER_LED = 13;
-const int DEBUG_LED = 11;
+const int WATER_LED = 11;
+const int DEBUG_LED = 13;
 
 const int ULTRA_TRIG = 9;
 const int ULTRA_ECHO = 10;
