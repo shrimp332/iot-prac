@@ -10,9 +10,9 @@
     <tbody>
         {% for row in results %}
         <tr>
-            {% for item in row %}
-            <td>{{ item }}</td>
-            {% endfor %}
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}%</td>
+            <td>{{ row[2] }}%</td>
         </tr>
         {% endfor %}
     </tbody>
