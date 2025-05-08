@@ -1,0 +1,19 @@
+<table id="table" hx-get="/api/table" hx-trigger="every 30s" hx-target="#table" hx-swap="outerHTML">
+    <thead>
+        <tr>
+            <th>Date-Time</th>
+            <th>Moistness</th>
+            <th>Water Level</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for row in results %}
+        <tr>
+            {% for item in row %}
+            <td>{{ item }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

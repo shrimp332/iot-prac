@@ -1,0 +1,14 @@
+// sent from edge
+// change valve
+{"type": 0, "state": true }
+// change led
+{"type": 1, "state": true }
+// sent to edge
+// Sensor data [moist, distance]
+{"type": 2, "data": [95, 25]}
+// print confirm
+{"type": 3, "message": "Confirm Valve On"}
+// broken message (For when recieve invalid message)
+{"type": 4, "message": "Broken Message"}
+// set thresholds [moist, distance]
+{"type": 5, "data": [30, 64]}

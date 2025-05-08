@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <script src="https://unpkg.com/htmx.org@2.0.4"
+        integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+        crossorigin="anonymous"></script>
+
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: gray;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Garden Current Data</h1>
+    <div style="display:flex;">
+        <div id="table" hx-get="/api/table" hx-trigger="load" hx-target="#table" hx-swap="innerHTML">
+            Table Loading...
+        </div>
+        <div style="margin-left:2em;">
+            <label for="level">Water Level: </label>
+            <span id="level" hx-get="/api/water_level" hx-trigger="every 5s" hx-target="#level" hx-swap="innerHTML">
+                Loading...
+            </span>%<br>
+            <label for="moist">Soil Moistness: </label>
+            <span id="moist" hx-get="/api/moistness" hx-trigger="every 5s" hx-target="#moist" hx-swap="innerHTML">
+                Loading...
+            </span>%<br>
+
+            <form hx-post="/api/moistness" hx-target="#moist">
+                <label for="val-moist">Set Min Moistness Threshold</label>
+                <input id="val-moist" name="value" type="text">
+                <input type="submit" value="Set">
+            </form>
+            <form hx-post="/api/moistness" hx-target="#moist">
+                <label for="val-moist">Set Max Moistness Threshold</label>
+                <input id="val-moist" name="max-value" type="text">
+                <input type="submit" value="Set">
+            </form>
+            <form hx-post="/api/water_level" hx-target="#level">
+                <label for="val-water">Set Water Level Threshold</label>
+                <input id="val-water" name="value" type="text">
+                <input type="submit" value="Set">
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
