@@ -38,13 +38,17 @@ def handle_serial():
                 m_type = data['type']
                 if m_type == 2:
                     handle_data(data)
-                elif m_type == 3 or m_type == 4:
+                elif m_type == 3:
                     print(data['message'])
+                elif m_type == 4:
+                    print(f"\x1b[31mReseinding state: {
+                          data['message']}\x1b[0m")
+                    resend_state()
             except Exception as e:
-                print(f"error={e} data={line}")
+                print(f"\x1b[31merror={e} data={line}\x1b[0m")
                 time.sleep(1)
     except Exception as e:
-        print(e)
+        print(f"\x1b[31merror={e}\x1b[0m")
     finally:
         ser.close()
 
@@ -54,6 +58,11 @@ latest_water = "waiting for data"
 latest_moistness = "waiting for data"
 
 
+def resend_state():
+    ser.write(f"{{\"type\": 0, \"state\": {state[0]}}}\n".encode('utf-8'))
+    ser.write(f"{{\"type\": 1, \"state\": {state[1]}}}\n".encode('utf-8'))
+
+
 water_threshold = 15
 moist_min_threshold = 30
 moist_max_threshold = 60
@@ -61,6 +70,12 @@ moist_max_threshold = 60
 
 def handle_data(data):
     print(f"\x1b[32m{data}\x1b[0m")
+
+    global latest_water
+    latest_water = data['data'][1]
+
+    global latest_moistness
+    latest_moistness = data['data'][0]
 
     # if soil than 30% moist, turn on water
     if data['data'][0] <= moist_min_threshold and not state[0]:
@@ -78,11 +93,6 @@ def handle_data(data):
         state[1] = False
         ser.write("{\"type\": 1, \"state\": false }\n".encode('utf-8'))
 
-    global latest_water
-    latest_water = data['data'][1]
-
-    global latest_moistness
-    latest_moistness = data['data'][0]
     insert_data(latest_moistness, latest_water)
 
 
