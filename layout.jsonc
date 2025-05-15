@@ -10,5 +10,3 @@
 {"type": 3, "message": "Confirm Valve On"}
 // broken message (For when recieve invalid message)
 {"type": 4, "message": "Broken Message"}
-// set thresholds [moist, distance]
-{"type": 5, "data": [30, 64]}

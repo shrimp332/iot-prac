@@ -46,17 +46,17 @@
 
             <form hx-post="/api/moistness" hx-target="#moist">
                 <label for="val-moist">Set Min Moistness Threshold</label>
-                <input id="val-moist" name="value" type="text">
+                <input id="val-moist" name="value" type="text" value="30">
                 <input type="submit" value="Set">
             </form>
             <form hx-post="/api/moistness" hx-target="#moist">
                 <label for="val-moist">Set Max Moistness Threshold</label>
-                <input id="val-moist" name="max-value" type="text">
+                <input id="val-moist" name="max-value" type="text" value="60">
                 <input type="submit" value="Set">
             </form>
             <form hx-post="/api/water_level" hx-target="#level">
                 <label for="val-water">Set Water Level Threshold</label>
-                <input id="val-water" name="value" type="text">
+                <input id="val-water" name="value" type="text" value="15">
                 <input type="submit" value="Set">
             </form>
         </div>

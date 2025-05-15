@@ -1,6 +1,6 @@
 #include <ArduinoJson.h>
 
-const int WATER_LED = 11;
+const int WATER_LED = 13;
 const int DEBUG_LED = 13;
 
 const int ULTRA_TRIG = 9;
@@ -103,6 +103,7 @@ void collectSensorData() {
   constexpr long empty = 990.0L;  // max
   constexpr float full = 250.0L;  // min
 
+  // (max - value) / (max - min)
   long capacity = 100.0L * (empty - duration) / (empty - full);
 
   if (capacity < 0.0L) {

@@ -54,8 +54,8 @@ def handle_serial():
 
 
 state = [False, False]
-latest_water = "waiting for data"
-latest_moistness = "waiting for data"
+latest_water = -1
+latest_moistness = -1
 
 
 def resend_state():
